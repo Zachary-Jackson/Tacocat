@@ -1,6 +1,6 @@
 from flask import (Flask, render_template, flash, redirect, url_for, g)
-from flask_bcrypt import check_password_hash
-from flask_login import (LoginManager, login_user, logout_user, login_required,
+from flask.ext.bcrypt import check_password_hash
+from flask.ext.login import (LoginManager, login_user, logout_user, login_required,
                          current_user)
 
 

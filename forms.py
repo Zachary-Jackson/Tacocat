@@ -1,4 +1,4 @@
-from flask_wtf import FlaskForm
+from flask_wtf import Form
 from wtforms import StringField, PasswordField
 from wtforms.validators import (DataRequired, Email, Length, EqualTo,
                                 ValidationError)
@@ -14,7 +14,7 @@ def email_exists(form, field):
         raise ValidationError('User with that email already exists.')
 
 
-class RegisterForm(FlaskForm):
+class RegisterForm(Form):
     email = StringField(
         'Email',
         validators=[
@@ -35,13 +35,13 @@ class RegisterForm(FlaskForm):
     )
 
 
-class LoginForm(FlaskForm):
+class LoginForm(Form):
     """This is the form user's complete to login."""
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = StringField('Password', validators=[DataRequired()])
 
 
-class TacoForm(FlaskForm):
+class TacoForm(Form):
     """This gets the user's taco choices."""
     protein = StringField('Protein', validators=[DataRequired()])
     shell = StringField('Shell', validators=[DataRequired()])

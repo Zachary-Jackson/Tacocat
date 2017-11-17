@@ -39,3 +39,11 @@ class LoginForm(FlaskForm):
     """This is the form user's complete to login."""
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = StringField('Password', validators=[DataRequired()])
+
+
+class TacoForm(FlaskForm):
+    """This gets the user's taco choices."""
+    protein = StringField('Protein', validators=[DataRequired()])
+    shell = StringField('Shell', validators=[DataRequired()])
+    cheese = StringField('Cheese')
+    extras = StringField('Extras')

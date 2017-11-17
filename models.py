@@ -6,6 +6,7 @@ from peewee import *
 
 DATABASE = SqliteDatabase('taco.db')
 
+
 class User(UserMixin, Model):
     """This is the model for a user."""
     email = CharField(unique=True)
@@ -38,14 +39,15 @@ class Taco(Model):
     timestamp = DateTimeField(default=datetime.datetime.now)
     protein = CharField()
     shell = CharField()
-    cheese = BooleanField()
+    cheese = CharField()
     extras = CharField()
 
     class Meta:
         database = DATABASE
+        order_by = ('-timestamp',)
 
 
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([User], safe=True)
+    DATABASE.create_tables([User, Taco], safe=True)
     DATABASE.close()

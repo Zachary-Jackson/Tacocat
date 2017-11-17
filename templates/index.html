@@ -16,11 +16,22 @@
         {% for taco in tacos %}
             <tr>
               <!-- taco attributes here -->
+              <p>Made by {{ taco.user.email }} on {{taco.timestamp.strftime('%Y-%m-%d %H:%M:%S')}}.</p>
+              {% if taco.cheese and taco.extras %}
+                <p>A {{ taco.protein }} taco with {{ taco.cheese }} cheese, and {{ taco.extras }} on a {{ taco.shell}} shell.</P>
+              {% elif taco.cheese and not taco.extras%}
+                <p>A {{taco.protein}} taco with {{ taco.cheese}} cheese on a {{ taco.shell}} shell.</p>
+              {% elif not taco.cheese and taco.extras%}
+              <p>A {{ taco.shell }} shelled taco with {{ taco.extras }} and {{ taco.protein }}.</p>
+              {% elif not taco.cheese and not taco.extras%}
+              <p>A {{ taco.shell }} shelled taco with {{ taco.protein }}.</p>
+              {% endif %}
             </tr>
         {% endfor %}
           </tbody>
         </table>
     {% else %}
         <!-- message for missing tacos -->
+        <p>There are currently no tacos. Be the first!</p>
     {% endif %}
 {% endblock %}

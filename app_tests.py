@@ -113,13 +113,13 @@ class UserViewsTestCase(ViewTestCase):
         self.assertIn("sign up", rv.get_data(as_text=True).lower())
         self.assertIn("log in", rv.get_data(as_text=True).lower())
 
-#    def test_logged_in_menu(self):
-#        with test_database(TEST_DB, (User,)):
-#            UserModelTestCase.create_users(1)
-#            self.app.post('/login', data=USER_DATA)
-#            rv = self.app.get('/')
-#            self.assertIn("add a new taco", rv.get_data(as_text=True).lower())
-#            self.assertIn("log out", rv.get_data(as_text=True).lower())
+    def test_logged_in_menu(self):
+        with test_database(TEST_DB, (User,)):
+            UserModelTestCase.create_users(1)
+            self.app.post('/login', data=USER_DATA)
+            rv = self.app.get('/')
+            self.assertIn("add a new taco", rv.get_data(as_text=True).lower())
+            self.assertIn("log out", rv.get_data(as_text=True).lower())
 
 
 #class TacoViewsTestCase(ViewTestCase):

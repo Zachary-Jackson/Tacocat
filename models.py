@@ -9,7 +9,7 @@ DATABASE = SqliteDatabase('taco.db')
 class User(UserMixin, Model):
     """This is the model for a user."""
     email = CharField(unique=True)
-    password = CharField(max_length = 35)
+    password = CharField(max_length=35)
     joined_at = DateTimeField(default=datetime.datetime.now)
     is_admin = BooleanField(default=False)
 
@@ -28,6 +28,7 @@ class User(UserMixin, Model):
         except IntegrityError:
             raise ValueError("User already exists")
 
+
 class Taco(Model):
     """ This is the model for a taco. Yum!"""
     user = ForeignKeyField(
@@ -37,8 +38,14 @@ class Taco(Model):
     timestamp = DateTimeField(default=datetime.datetime.now)
     protein = CharField()
     shell = CharField()
-    cheese = CharField()
+    cheese = BooleanField()
     extras = CharField()
 
     class Meta:
         database = DATABASE
+
+
+def initialize():
+    DATABASE.connect()
+    DATABASE.create_tables([User], safe=True)
+    DATABASE.close()

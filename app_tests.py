@@ -65,53 +65,53 @@ class TacoModelTestCase(unittest.TestCase):
             self.assertEqual(taco.user, user)
 
 
-#class ViewTestCase(unittest.TestCase):
-#    def setUp(self):
-#        tacocat.app.config['TESTING'] = True
-#        tacocat.app.config['WTF_CSRF_ENABLED'] = False
-#        self.app = tacocat.app.test_client()
+class ViewTestCase(unittest.TestCase):
+    def setUp(self):
+        tacocat.app.config['TESTING'] = True
+        tacocat.app.config['WTF_CSRF_ENABLED'] = False
+        self.app = tacocat.app.test_client()
 
 
-#class UserViewsTestCase(ViewTestCase):
-#    def test_registration(self):
-#        data = {
-#            'email': 'test@example.com',
-#            'password': 'password',
-#            'password2': 'password'
-#        }
-#        with test_database(TEST_DB, (User,)):
-#            rv = self.app.post(
-#                '/register',
-#                data=data)
-#            self.assertEqual(rv.status_code, 302)
-#            self.assertEqual(rv.location, 'http://localhost/')
+class UserViewsTestCase(ViewTestCase):
+    def test_registration(self):
+        data = {
+            'email': 'test@example.com',
+            'password': 'password',
+            'password2': 'password'
+        }
+        with test_database(TEST_DB, (User,)):
+            rv = self.app.post(
+                '/register',
+                data=data)
+            self.assertEqual(rv.status_code, 302)
+            self.assertEqual(rv.location, 'http://localhost/')
 
-#    def test_good_login(self):
-#        with test_database(TEST_DB, (User,)):
-#            UserModelTestCase.create_users(1)
-#            rv = self.app.post('/login', data=USER_DATA)
-#            self.assertEqual(rv.status_code, 302)
-#            self.assertEqual(rv.location, 'http://localhost/')
+    def test_good_login(self):
+        with test_database(TEST_DB, (User,)):
+            UserModelTestCase.create_users(1)
+            rv = self.app.post('/login', data=USER_DATA)
+            self.assertEqual(rv.status_code, 302)
+            self.assertEqual(rv.location, 'http://localhost/')
 
-#    def test_bad_login(self):
-#        with test_database(TEST_DB, (User,)):
-#            rv = self.app.post('/login', data=USER_DATA)
-#            self.assertEqual(rv.status_code, 200)
+    def test_bad_login(self):
+        with test_database(TEST_DB, (User,)):
+            rv = self.app.post('/login', data=USER_DATA)
+            self.assertEqual(rv.status_code, 200)
 
-#    def test_logout(self):
-#        with test_database(TEST_DB, (User,)):
-#            # Create and login the user
-#            UserModelTestCase.create_users(1)
-#            self.app.post('/login', data=USER_DATA)
+    def test_logout(self):
+        with test_database(TEST_DB, (User,)):
+            # Create and login the user
+            UserModelTestCase.create_users(1)
+            self.app.post('/login', data=USER_DATA)
 
-#            rv = self.app.get('/logout')
-#            self.assertEqual(rv.status_code, 302)
-#            self.assertEqual(rv.location, 'http://localhost/')
+            rv = self.app.get('/logout')
+            self.assertEqual(rv.status_code, 302)
+            self.assertEqual(rv.location, 'http://localhost/')
 
-#    def test_logged_out_menu(self):
-#        rv = self.app.get('/')
-#        self.assertIn("sign up", rv.get_data(as_text=True).lower())
-#        self.assertIn("log in", rv.get_data(as_text=True).lower())
+    def test_logged_out_menu(self):
+        rv = self.app.get('/')
+        self.assertIn("sign up", rv.get_data(as_text=True).lower())
+        self.assertIn("log in", rv.get_data(as_text=True).lower())
 
 #    def test_logged_in_menu(self):
 #        with test_database(TEST_DB, (User,)):

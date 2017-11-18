@@ -122,44 +122,44 @@ class UserViewsTestCase(ViewTestCase):
             self.assertIn("log out", rv.get_data(as_text=True).lower())
 
 
-#class TacoViewsTestCase(ViewTestCase):
-#    def test_empty_db(self):
-#        with test_database(TEST_DB, (Taco,)):
-#            rv = self.app.get('/')
-#            self.assertIn("no tacos yet", rv.get_data(as_text=True).lower())
+class TacoViewsTestCase(ViewTestCase):
+    def test_empty_db(self):
+        with test_database(TEST_DB, (Taco,)):
+            rv = self.app.get('/')
+            self.assertIn("no tacos yet", rv.get_data(as_text=True).lower())
 
-#    def test_taco_create(self):
-#        taco_data = {
-#            'protein': 'chicken',
-#            'shell': 'flour',
-#            'cheese': False,
-#            'extras': 'Gimme some guac.'
-#        }
-#        with test_database(TEST_DB, (User, Taco)):
-#            UserModelTestCase.create_users(1)
-#            self.app.post('/login', data=USER_DATA)
+    def test_taco_create(self):
+        taco_data = {
+            'protein': 'chicken',
+            'shell': 'flour',
+            'cheese': False,
+            'extras': 'Gimme some guac.'
+        }
+        with test_database(TEST_DB, (User, Taco)):
+            UserModelTestCase.create_users(1)
+            self.app.post('/login', data=USER_DATA)
 
-#            taco_data['user'] = User.select().get()
-#            rv = self.app.post('/taco', data=taco_data)
-#            self.assertEqual(rv.status_code, 302)
-#            self.assertEqual(rv.location, 'http://localhost/')
-#            self.assertEqual(Taco.select().count(), 1)
+            taco_data['user'] = User.select().get()
+            rv = self.app.post('/taco', data=taco_data)
+            self.assertEqual(rv.status_code, 302)
+            self.assertEqual(rv.location, 'http://localhost/')
+            self.assertEqual(Taco.select().count(), 1)
 
-#        def test_taco_list(self):
-#            taco_data = {
-#                'protein': 'chicken',
-#                'shell': 'flour',
-#                'cheese': False,
-#                'extras': 'Gimme some guac.'
-#            }
-#            with test_database(TEST_DB, (User, Taco)):
-#                UserModelTestCase.create_users(1)
-#                taco_data['user'] = User.select().get()
-#                Taco.create(**taco_data)
+        def test_taco_list(self):
+            taco_data = {
+                'protein': 'chicken',
+                'shell': 'flour',
+                'cheese': False,
+                'extras': 'Gimme some guac.'
+            }
+            with test_database(TEST_DB, (User, Taco)):
+                UserModelTestCase.create_users(1)
+                taco_data['user'] = User.select().get()
+                Taco.create(**taco_data)
 
-#                rv = self.app.get('/')
-#                self.assertNotIn('no tacos yet', rv.get_data(as_text=True))
-#                self.assertIn(taco_data['extras'], rv.get_data(as_text=True))
+                rv = self.app.get('/')
+                self.assertNotIn('no tacos yet', rv.get_data(as_text=True))
+                self.assertIn(taco_data['extras'], rv.get_data(as_text=True))
 
 
 if __name__ == '__main__':

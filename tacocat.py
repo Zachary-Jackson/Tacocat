@@ -1,7 +1,7 @@
 from flask import (Flask, render_template, flash, redirect, url_for, g)
 from flask.ext.bcrypt import check_password_hash
-from flask.ext.login import (LoginManager, login_user, logout_user, login_required,
-                         current_user)
+from flask.ext.login import (LoginManager, login_user, logout_user,
+                             login_required, current_user)
 
 
 import forms
@@ -30,7 +30,7 @@ def load_user(userid):
 
 @app.before_request
 def before_request():
-    """Connect to the database before each requrest."""
+    """Connect to the database before each request."""
     g.db = models.DATABASE
     g.db.connect()
     g.user = current_user
@@ -91,7 +91,7 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/post', methods=('GET', 'POST'))
+@app.route('/taco', methods=('GET', 'POST'))
 @login_required
 def post():
     """This lets a user submit a post."""
@@ -102,6 +102,7 @@ def post():
                            shell=form.shell.data.strip().lower(),
                            cheese=form.cheese.data.strip().lower(),
                            extras=form.extras.data.strip().lower())
+        flash("Your taco has been added. Thanks!", "success")
         return redirect(url_for('index'))
     return render_template("taco.html", form=form)
 

@@ -25,10 +25,10 @@
           <nav class="menu">
           <!-- menu goes here -->
             <a href="/">TacoCat </a>
-            <p>Meow!!{% if current_user.is_authenticated %} {{ current_user.email }} {% endif %}</p>
-            {% if current_user.is_authenticated %}
-              <a href="{{ url_for('logout') }}" title="Log out">Log out</a>
-              <a href="{{ url_for('post') }}" title="Post">Post</a>
+            <p>Meow!!{% if current_user.is_authenticated() %} {{ current_user.email }} {% endif %}</p>
+            {% if current_user.is_authenticated() %}
+              <a href="{{ url_for('logout') }}" title="Log out">log out</a>
+              <a href="{{ url_for('post') }}" title="New taco">add a new taco</a>
             {% else %}
               <a href="{{ url_for('login') }}" class="icon-power">log in</a>
               <a href="{{ url_for('register')}}" title="register">sign up</a>
